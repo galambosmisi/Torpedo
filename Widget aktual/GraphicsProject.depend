@@ -1,0 +1,441 @@
+# depslib dependency file v1.0
+1491300209 source:c:\users\galmi\desktop\graphicskezdokit(1)\include\komplex.cpp
+	<graphics.hpp>
+	"komplex.hpp"
+
+1491300207 c:\users\galmi\desktop\graphicskezdokit(1)\include\komplex.hpp
+	"graphics.hpp"
+
+1490698170 source:c:\users\galmi\desktop\graphicskezdokit(1)\include\mandelrajz.cpp
+	"komplex.hpp"
+	"graphics.hpp"
+
+1490691110 c:\users\galmi\desktop\graphicskezdokit(1)\include\graphics.hpp
+	<string>
+
+1491302130 source:c:\users\galmi\desktop\graphicskezdokit(1)\main.cpp
+	"graphics.hpp"
+	"widgets.hpp"
+	"examplecheckbox.hpp"
+	"statictextbox.hpp"
+	"dynamictextbox.hpp"
+	<vector>
+
+1490697156 c:\users\galmi\desktop\graphicskezdokit(1)\include\mandelrajz.hpp
+	"komplex.hpp"
+
+1491302593 c:\users\galmi\desktop\graphicskezdokit(1)\include\widgets.hpp
+	"graphics.hpp"
+
+1491294417 c:\users\galmi\desktop\graphicskezdokit(1)\include\examplecheckbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1491294417 source:c:\users\galmi\desktop\graphicskezdokit(1)\include\examplecheckbox.cpp
+	"examplecheckbox.hpp"
+	"graphics.hpp"
+
+1491302696 source:c:\users\galmi\desktop\graphicskezdokit(1)\include\widgets.cpp
+	"widgets.hpp"
+	"graphics.hpp"
+
+1491296695 source:c:\users\galmi\desktop\graphicskezdokit(1)\include\exampletextbox.cpp
+	"exampletextbox.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1491296990 c:\users\galmi\desktop\graphicskezdokit(1)\include\exampletextbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1491302167 source:c:\users\galmi\desktop\graphicskezdokit(1)\include\dynamictextbox.cpp
+	"dynamictextbox.hpp"
+	"graphics.hpp"
+
+1491302577 c:\users\galmi\desktop\graphicskezdokit(1)\include\dynamictextbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+	"statictextbox.hpp"
+
+1491300463 c:\users\galmi\desktop\graphicskezdokit(1)\include\statictextbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1491298196 source:c:\users\galmi\desktop\graphicskezdokit(1)\include\staticetextbox.cpp
+	"statictextbox.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1492611514 source:c:\users\galambos mihály\desktop\widget készlep alap\include\dynamictextbox.cpp
+	"dynamictextbox.hpp"
+	"graphics.hpp"
+	<iostream>
+
+1492606117 c:\users\galambos mihály\desktop\widget készlep alap\include\dynamictextbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+	"statictextbox.hpp"
+
+1490694710 c:\users\galambos mihály\desktop\widget készlep alap\include\graphics.hpp
+	<string>
+
+1492690190 c:\users\galambos mihály\desktop\widget készlep alap\include\widgets.hpp
+	"graphics.hpp"
+
+1492604126 c:\users\galambos mihály\desktop\widget készlep alap\include\statictextbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1491298018 source:c:\users\galambos mihály\desktop\widget készlep alap\include\examplecheckbox.cpp
+	"examplecheckbox.hpp"
+	"graphics.hpp"
+
+1491298018 c:\users\galambos mihály\desktop\widget készlep alap\include\examplecheckbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1492604123 source:c:\users\galambos mihály\desktop\widget készlep alap\include\staticetextbox.cpp
+	"statictextbox.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1492688098 source:c:\users\galambos mihály\desktop\widget készlep alap\include\widgets.cpp
+	"widgets.hpp"
+	"graphics.hpp"
+
+1492687074 source:c:\users\galambos mihály\desktop\widget készlep alap\main.cpp
+	"graphics.hpp"
+	"widgets.hpp"
+	"examplecheckbox.hpp"
+	"statictextbox.hpp"
+	"dynamictextbox.hpp"
+	"numericsetter.hpp"
+	"dropdownmenu.hpp"
+	<vector>
+	<sstream>
+
+1492611266 source:c:\users\galambos mihály\desktop\widget készlep alap\numericsetter.cpp
+	"numericsetter.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1492611266 c:\users\galambos mihály\desktop\widget készlep alap\include\numericsetter.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1492689144 source:c:\users\galambos mihály\desktop\widget készlep alap\include\dropdownmenu.cpp
+	"dropdownmenu.hpp"
+	"graphics.hpp"
+	<sstream>
+	<vector>
+	<iostream>
+
+1492690238 c:\users\galambos mihály\desktop\widget készlep alap\include\dropdownmenu.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+	<vector>
+
+1492681108 source:c:\users\galambos mihály\desktop\widget készlep alap\include\numericsetter.cpp
+	"numericsetter.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1493716198 source:c:\users\galambos mihály\desktop\widget készlet\include\dropdownmenu.cpp
+	"dropdownmenu.hpp"
+	"graphics.hpp"
+	<sstream>
+	<vector>
+	<iostream>
+
+1493655574 c:\users\galambos mihály\desktop\widget készlet\include\dropdownmenu.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+	<vector>
+
+1493111970 c:\users\galambos mihály\desktop\widget készlet\include\graphics.hpp
+	<string>
+
+1493677856 c:\users\galambos mihály\desktop\widget készlet\include\widgets.hpp
+	"graphics.hpp"
+
+1493655075 source:c:\users\galambos mihály\desktop\widget készlet\include\dynamictextbox.cpp
+	"dynamictextbox.hpp"
+	"graphics.hpp"
+	<iostream>
+
+1493655075 c:\users\galambos mihály\desktop\widget készlet\include\dynamictextbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+	"statictextbox.hpp"
+
+1493655075 c:\users\galambos mihály\desktop\widget készlet\include\statictextbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1493655075 source:c:\users\galambos mihály\desktop\widget készlet\include\examplecheckbox.cpp
+	"examplecheckbox.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1493655075 c:\users\galambos mihály\desktop\widget készlet\include\examplecheckbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1493655075 source:c:\users\galambos mihály\desktop\widget készlet\include\numericsetter.cpp
+	"numericsetter.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1493655075 c:\users\galambos mihály\desktop\widget készlet\include\numericsetter.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1493655075 source:c:\users\galambos mihály\desktop\widget készlet\include\staticetextbox.cpp
+	"statictextbox.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1493677856 source:c:\users\galambos mihály\desktop\widget készlet\include\widgets.cpp
+	"widgets.hpp"
+	"graphics.hpp"
+
+1493716350 source:c:\users\galambos mihály\desktop\widget készlet\main.cpp
+	"graphics.hpp"
+	"widgets.hpp"
+	"window.hpp"
+	"button.hpp"
+	"examplecheckbox.hpp"
+	"statictextbox.hpp"
+	"dynamictextbox.hpp"
+	"numericsetter.hpp"
+	"dropdownmenu.hpp"
+	<vector>
+	<sstream>
+	<iostream>
+	<fstream>
+
+1494322510 source:c:\users\galmi\desktop\widget készlet\include\dropdownmenu.cpp
+	"dropdownmenu.hpp"
+	"graphics.hpp"
+	<sstream>
+	<vector>
+	<iostream>
+
+1494321674 c:\users\galmi\desktop\widget készlet\include\dropdownmenu.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+	<vector>
+
+1493108370 c:\users\galmi\desktop\widget készlet\include\graphics.hpp
+	<string>
+
+1494322189 c:\users\galmi\desktop\widget készlet\include\widgets.hpp
+	"window.hpp"
+	"graphics.hpp"
+
+1494325711 source:c:\users\galmi\desktop\widget készlet\include\dynamictextbox.cpp
+	"dynamictextbox.hpp"
+	"graphics.hpp"
+	<iostream>
+
+1494325707 c:\users\galmi\desktop\widget készlet\include\dynamictextbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+	"statictextbox.hpp"
+
+1494321767 c:\users\galmi\desktop\widget készlet\include\statictextbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1494322510 source:c:\users\galmi\desktop\widget készlet\include\examplecheckbox.cpp
+	"examplecheckbox.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1494321767 c:\users\galmi\desktop\widget készlet\include\examplecheckbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1494322510 source:c:\users\galmi\desktop\widget készlet\include\numericsetter.cpp
+	"numericsetter.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1494321767 c:\users\galmi\desktop\widget készlet\include\numericsetter.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1494325310 source:c:\users\galmi\desktop\widget készlet\include\staticetextbox.cpp
+	"statictextbox.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1494322366 source:c:\users\galmi\desktop\widget készlet\include\widgets.cpp
+	"widgets.hpp"
+	"graphics.hpp"
+
+1494326627 source:c:\users\galmi\desktop\widget készlet\main.cpp
+	"graphics.hpp"
+	"widgets.hpp"
+	"window.hpp"
+	"button.hpp"
+	"examplecheckbox.hpp"
+	"statictextbox.hpp"
+	"dynamictextbox.hpp"
+	"numericsetter.hpp"
+	"dropdownmenu.hpp"
+	<stdlib.h>
+	<vector>
+	<sstream>
+	<string>
+	<iostream>
+	<fstream>
+
+1494322392 source:c:\users\galmi\desktop\widget készlet\include\window.cpp
+	"window.hpp"
+	"graphics.hpp"
+	<iostream>
+	<fstream>
+
+1494322382 c:\users\galmi\desktop\widget készlet\include\window.hpp
+	"widgets.hpp"
+	<iostream>
+	<vector>
+
+1494324585 source:c:\users\galmi\desktop\widget készlet\include\button.cpp
+	"button.hpp"
+
+1494321767 c:\users\galmi\desktop\widget készlet\include\button.hpp
+	"window.hpp"
+
+1493655087 source:c:\users\galambos mihály\desktop\widget készlet\include\window.cpp
+	"window.hpp"
+	"graphics.hpp"
+	<iostream>
+	<fstream>
+
+1493118996 c:\users\galambos mihály\desktop\widget készlet\include\window.hpp
+	"widgets.hpp"
+	<vector>
+
+1493678011 source:c:\users\galambos mihály\desktop\widget készlet\include\button.cpp
+	"button.hpp"
+
+1493655075 c:\users\galambos mihály\desktop\widget készlet\include\button.hpp
+	"window.hpp"
+
+1494328186 source:\\mac\home\desktop\widget aktual\include\button.cpp
+	"button.hpp"
+
+1494325368 \\mac\home\desktop\widget aktual\include\button.hpp
+	"window.hpp"
+
+1494684249 \\mac\home\desktop\widget aktual\include\window.hpp
+	"widgets.hpp"
+	<iostream>
+	<vector>
+
+1494678341 \\mac\home\desktop\widget aktual\include\widgets.hpp
+	"window.hpp"
+	"graphics.hpp"
+
+1493111970 \\mac\home\desktop\widget aktual\include\graphics.hpp
+	<string>
+
+1494326112 source:\\mac\home\desktop\widget aktual\include\dropdownmenu.cpp
+	"dropdownmenu.hpp"
+	"graphics.hpp"
+	<sstream>
+	<vector>
+	<iostream>
+
+1494325276 \\mac\home\desktop\widget aktual\include\dropdownmenu.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+	<vector>
+
+1494683322 source:\\mac\home\desktop\widget aktual\include\dynamictextbox.cpp
+	"dynamictextbox.hpp"
+	"graphics.hpp"
+	<iostream>
+
+1494329308 \\mac\home\desktop\widget aktual\include\dynamictextbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+	"statictextbox.hpp"
+
+1494683270 \\mac\home\desktop\widget aktual\include\statictextbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1494326112 source:\\mac\home\desktop\widget aktual\include\examplecheckbox.cpp
+	"examplecheckbox.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1494325368 \\mac\home\desktop\widget aktual\include\examplecheckbox.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1494662760 source:\\mac\home\desktop\widget aktual\include\numericsetter.cpp
+	"numericsetter.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1494325368 \\mac\home\desktop\widget aktual\include\numericsetter.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+
+1494683257 source:\\mac\home\desktop\widget aktual\include\staticetextbox.cpp
+	"statictextbox.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1494673275 source:\\mac\home\desktop\widget aktual\include\widgets.cpp
+	"widgets.hpp"
+	"graphics.hpp"
+
+1494684333 source:\\mac\home\desktop\widget aktual\include\window.cpp
+	"window.hpp"
+	"graphics.hpp"
+	<iostream>
+	<fstream>
+
+1494684557 source:\\mac\home\desktop\widget aktual\main.cpp
+	"graphics.hpp"
+	"widgets.hpp"
+	"window.hpp"
+	"button.hpp"
+	"examplecheckbox.hpp"
+	"statictextbox.hpp"
+	"dynamictextbox.hpp"
+	"numericsetter.hpp"
+	"dropdownmenu.hpp"
+	"player.hpp"
+	"map.hpp"
+	<stdlib.h>
+	<vector>
+	<sstream>
+	<string>
+	<iostream>
+	<fstream>
+
+1494682137 source:\\mac\home\desktop\widget aktual\include\map.cpp
+	"map.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1494684557 \\mac\home\desktop\widget aktual\include\map.hpp
+	"graphics.hpp"
+	"widgets.hpp"
+	<vector>
+
+1494681443 source:\\mac\home\desktop\widget aktual\include\player.cpp
+	"player.hpp"
+	"graphics.hpp"
+	<sstream>
+
+1494681456 \\mac\home\desktop\widget aktual\include\player.hpp
+	"graphics.hpp"
+	"map.hpp"
+
