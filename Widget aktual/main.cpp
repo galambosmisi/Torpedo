@@ -21,123 +21,195 @@ const koord w_poz(840,500);
 const koord map_poz1(10,10);
 const koord map_poz2(350,10);
 
+ostream operator<< (ostream & s, koord k)
+{
+    s<<k._x<<"  "<<k._y;
+}
+
 class setUpMenu : public Window
 {
-   public:
+public:
     string player_id;
-    vector<ShipMaker *> sm;
-    vector<Ship> s;
-               Map * m;
-            Button * b1;
-            Button * b2;
+    vector<ShipMaker *> sm; //reSet() f√ºggv√©ny egyszer≈±bb megh√≠v√°sa miatt
+
+    Map * m;
+    Button * b1;
+    Button * b2;
     DynamicTextBox * dtx;
-     StaticTextBox * stx1;
-     StaticTextBox * stx2;
-         ShipMaker * sm1;
-         ShipMaker * sm2;
-         ShipMaker * sm3;
-         ShipMaker * sm4;
-         ShipMaker * sm5;
-         ShipMaker * sm6;
-         ShipMaker * sm7;
+    StaticTextBox * stx1;
+    StaticTextBox * stx2;
+    StaticTextBox * stx3;
+    ShipMaker * sm1;
+    ShipMaker * sm2;
+    ShipMaker * sm3;
+    ShipMaker * sm4;
+    ShipMaker * sm5;
+    ShipMaker * sm6;
+    ShipMaker * sm7;
 
     setUpMenu(int x, int y, string p_id) : Window(x,y)
     {
         m = new Map(this, 450,90,30, "setUp_map");
-       b1 = new Button(this, 565,420,120,30,"KÈsz","player_done");
-       b2 = new Button(this, 95,357,120,30,"Tiszta lap","storno");
-      dtx = new DynamicTextBox(this, 395,10,150,30,p_id,true);
-     stx1 = new StaticTextBox(this, 295,10,30,"J·tkos neve:", false);
-     stx2 = new StaticTextBox(this, 10,130,30,"Helyezd el a hajÛkat:", false);
+        b1 = new Button(this, 565,420,120,30,"Done","player_done");
+        b2 = new Button(this, 95,357,120,30,"Reset","storno");
+        dtx = new DynamicTextBox(this, 395,10,150,30,p_id,true);
+        stx1 = new StaticTextBox(this, 290,10,30,"Player name:", false);
+        stx2 = new StaticTextBox(this, 10,120,30,"Place your ships:", false);
+        stx3 = new StaticTextBox(this, 10,140,30,"To rotate press the 'space' key", false);
 
-     sm1  = new ShipMaker(this,m,60,180,30,4);
-     sm2  = new ShipMaker(this,m,60,239,30,3);
-     sm3  = new ShipMaker(this,m,160,239,30,3);
-     sm4  = new ShipMaker(this,m,60,298,30,2);
-     sm5  = new ShipMaker(this,m,130,298,30,2);
-     sm6  = new ShipMaker(this,m,200,298,30,2);
-     sm7  = new ShipMaker(this,m,190,180,30,1);
+        sm1  = new ShipMaker(this,m,60,180,30,4,"1");
+        sm2  = new ShipMaker(this,m,60,239,30,3,"2");
+        sm3  = new ShipMaker(this,m,160,239,30,3,"3");
+        sm4  = new ShipMaker(this,m,60,298,30,2,"4");
+        sm5  = new ShipMaker(this,m,130,298,30,2,"5");
+        sm6  = new ShipMaker(this,m,200,298,30,2,"6");
+        sm7  = new ShipMaker(this,m,190,180,30,1,"7");
 
-     sm.push_back(sm1);
-     sm.push_back(sm2);
-     sm.push_back(sm3);
-     sm.push_back(sm4);
-     sm.push_back(sm5);
-     sm.push_back(sm6);
-     sm.push_back(sm7);
+        sm.push_back(sm1);
+        sm.push_back(sm2);
+        sm.push_back(sm3);
+        sm.push_back(sm4);
+        sm.push_back(sm5);
+        sm.push_back(sm6);
+        sm.push_back(sm7);
 
-     focus=0;
+        focus=0;
+    }
+
+    bool cmp (vector<koord> k)
+    {
+        bool asd=true;
+        cout<<endl<<"Osszehasonlitas: "<<endl;
+        for(int i=0; i<m->all_ship_pos.size(); i++)
+        {
+            cout<<endl<<i<< ". alap elem:";
+            for(int j=0; j<k.size(); j++)
+            {
+                cout<<endl<<"Eddigi: "<<m->all_ship_pos[i]._x<<"   "<<m->all_ship_pos[i]._y;
+                cout<<endl<<"  Most: "<<k[j]._x<<"   "<<k[j]._y;
+                if(m->all_ship_pos[i]==k[j]) asd=false;
+                cout<<endl<<" Ertek: "<<asd;
+                if(asd==false) break;
+
+
+            }
+            cout<<endl;
+            if(asd==false) break;
+        }
+
+        cout<<endl<<"Eredmeny: "<<asd<<endl<<endl;
+        return asd;
     }
 
     void action(string _ID)
     {
+        cout<<"Beerkezett _ID: "<<_ID<<"  |"<<endl;;
         if(_ID=="player_done") set_run(false);
         if(_ID=="storno")
         {
-            for(int i=0; i<s.size(); i++)
+            for(int i=0; i<sm.size(); i++)
             {
                 sm[i]->reSet();
             }
         }
-        if(_ID=="setUp_map")
+
+        if(_ID=="1")
         {
-            //s.push_back()
+            Ship ms(sm1->_pos, sm1->box_size);
+            m->newShip(ms);
+        }
+        if(_ID=="2")
+        {
+            Ship ms(sm2->_pos, sm2->box_size);
+            m->newShip(ms);
+        }
+        if(_ID=="3")
+        {
+            Ship ms(sm3->_pos, sm3->box_size);
+            m->newShip(ms);
+        }
+        if(_ID=="4")
+        {
+            Ship ms(sm4->_pos, sm4->box_size);
+            m->newShip(ms);
+        }
+        if(_ID=="5")
+        {
+            Ship ms(sm5->_pos, sm5->box_size);
+            m->newShip(ms);
+        }
+        if(_ID=="6")
+        {
+            Ship ms(sm6->_pos, sm6->box_size);
+            m->newShip(ms);
+        }
+        if(_ID=="7")
+        {
+           Ship ms(sm7->_pos, sm7->box_size);
+            m->newShip(ms);
         }
 
+        if(_ID=="cmp1" && cmp(sm1->_pos)) {sm1->place=true; sm1->makeKoord();}
+        if(_ID=="cmp2" && cmp(sm2->_pos)) {sm2->place=true; sm2->makeKoord();}
+        if(_ID=="cmp3" && cmp(sm3->_pos)) {sm3->place=true; sm3->makeKoord();}
+        if(_ID=="cmp4" && cmp(sm4->_pos)) {sm4->place=true; sm4->makeKoord();}
+        if(_ID=="cmp5" && cmp(sm5->_pos)) {sm5->place=true; sm5->makeKoord();}
+        if(_ID=="cmp6" && cmp(sm6->_pos)) {sm6->place=true; sm6->makeKoord();}
+        if(_ID=="cmp7" && cmp(sm7->_pos)) {sm7->place=true; sm7->makeKoord();}
     }
 
     void event_loop()
-{
-    event ev;
-
-    gout.open(XX,YY);
-
-    _color _back; //H·ttÈr szÌne
-    _back.set_color(255,255,255);
-
-
-    //Kirajzol·s
-    gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
-    for (size_t i=0; i<widgets.size(); i++)
     {
-        widgets[i]->draw();
-    }
+        event ev;
 
-    gout << refresh;
+        gout.open(XX,YY);
 
-    while(gin >> ev && _run)
-    {
-        //SztornÛ
+        _color _back; //H√°tt√©r sz√≠ne
+        _back.set_color(255,255,255);
+
+
+        //Kirajzol√°s
         gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
-
-        //Kattint·s, kiv·laszt·s
-        if (ev.type == ev_mouse && ev.button==btn_left)
-        {
-            for (size_t i=0; i<widgets.size(); i++)
-            {
-                if (widgets[i]->is_selected(ev.pos_x, ev.pos_y))
-                {
-                    focus = i;
-                }
-            }
-        }
-
-        //KezelÈs
-        if (focus!=-1)
-        {
-            widgets[focus]->handle(ev);
-            widgets[0]->handle(ev);
-        }
-
-        //Kirajzol·s
         for (size_t i=0; i<widgets.size(); i++)
         {
             widgets[i]->draw();
         }
 
         gout << refresh;
+
+        while(gin >> ev && _run)
+        {
+            //Sztorn√≥
+            gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
+
+            //Kattint√°s, kiv√°laszt√°s
+            if (ev.type == ev_mouse && ev.button==btn_left)
+            {
+                for (size_t i=0; i<widgets.size(); i++)
+                {
+                    if (widgets[i]->is_selected(ev.pos_x, ev.pos_y))
+                    {
+                        focus = i;
+                    }
+                }
+            }
+
+            //Kezel√©s
+            if (focus!=-1)
+            {
+                widgets[focus]->handle(ev);
+                widgets[0]->handle(ev);
+            }
+
+            //Kirajzol√°s
+            for (size_t i=0; i<widgets.size(); i++)
+            {
+                widgets[i]->draw();
+            }
+
+            gout << refresh;
+        }
     }
-}
 };
 
 class Torpedo : public Window
@@ -152,9 +224,9 @@ protected:
 
 public:
 
-     Torpedo(int x, int y, vector<Ship> s1, vector<Ship> s2, string player_id1, string player_id2) : Window(x, y)
+    Torpedo(int x, int y, vector<Ship> s1, vector<Ship> s2, string player_id1, string player_id2) : Window(x, y)
     {
-         b = new Button(this, 175,420,120,30,"KÈsz","turn_player");
+        b = new Button(this, 175,420,120,30,"K√©sz","turn_player");
         p1 = new Player(this, s1, player_id1, "click_1");
         p2 = new Player(this, s2, player_id2, "click_2");
 
@@ -171,57 +243,62 @@ public:
     }
 
     void event_loop()
-{
-    event ev;
-
-    gout.open(XX,YY);
-
-    _color _back; //H·ttÈr szÌne
-    _back.set_color(255,255,255);
-
-
-    //Kirajzol·s
-    gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
-    for (size_t i=0; i<widgets.size(); i++)
     {
-        widgets[i]->draw();
-    }
+        event ev;
 
-    gout << refresh;
+        gout.open(XX,YY);
 
-    while(gin >> ev && _run)
-    {
-        //SztornÛ
+        _color _back; //H√°tt√©r sz√≠ne
+        _back.set_color(255,255,255);
+
+
+        //Kirajzol√°s
         gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
-
-        //Kattint·s, kiv·laszt·s
-        if (ev.type == ev_mouse && ev.button==btn_left)
-        {
-            for (size_t i=0; i<widgets.size(); i++)
-            {
-                if (widgets[i]->is_selected(ev.pos_x, ev.pos_y))
-                {
-                    focus = i;
-                }
-            }
-        }
-
-        //KezelÈs
-        if (focus!=-1)
-        {
-            widgets[focus]->handle(ev);
-        }
-
-        //Kirajzol·s
         for (size_t i=0; i<widgets.size(); i++)
         {
             widgets[i]->draw();
         }
 
         gout << refresh;
+
+        while(gin >> ev && _run)
+        {
+            //Sztorn√≥
+            gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
+
+            //Kattint√°s, kiv√°laszt√°s
+            if (ev.type == ev_mouse && ev.button==btn_left)
+            {
+                for (size_t i=0; i<widgets.size(); i++)
+                {
+                    if (widgets[i]->is_selected(ev.pos_x, ev.pos_y))
+                    {
+                        focus = i;
+                    }
+                }
+            }
+
+            //Kezel√©s
+            if (focus!=-1)
+            {
+                widgets[focus]->handle(ev);
+            }
+
+            //Kirajzol√°s
+            for (size_t i=0; i<widgets.size(); i++)
+            {
+                widgets[i]->draw();
+            }
+
+            gout << refresh;
+        }
     }
-}
 };
+
+void change_player()
+{
+
+}
 
 int main()
 {
@@ -232,9 +309,13 @@ int main()
 
     setUpMenu p1(w_poz._x,w_poz._y, "Player_1");
     p1.event_loop();
+    s1=p1.m->ships;
+    p_id1=p1.player_id;
 
     setUpMenu p2(w_poz._x,w_poz._y, "Player_2");
     p2.event_loop();
+    s2=p2.m->ships;
+    p_id2=p2.player_id;
 
     Torpedo ablak(w_poz._x,w_poz._y, s1, s2, p_id1, p_id2);
     ablak.event_loop();

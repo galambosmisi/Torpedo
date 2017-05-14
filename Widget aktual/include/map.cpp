@@ -11,7 +11,7 @@ Map::Map(Window * parent, int x, int y, int bs, string ID)
      active_x=1;
      active_y=1;
     _ID=ID;
-    shots.resize(10, vector<bool> (10, false));
+    shots.resize(10);
     box_size=bs;
     _text.set_color(0,0,0);             //_text.r,_text.g,_text.b
     _back.set_color(255,255,255);       //_back.r,_back.g,_back.b
@@ -27,7 +27,7 @@ Map::Map(Window * parent, int x, int y, int bs, string ID, vector<Ship> s)
     active_y=1;
     ships=s;
     _ID=ID;
-    shots.resize(10, vector<bool> (10, false));
+    shots.resize(10);
     box_size=bs;
     _text.set_color(0,0,0);             //_text.r,_text.g,_text.b
     _back.set_color(255,255,255);       //_back.r,_back.g,_back.b
@@ -68,7 +68,7 @@ void Map::draw() const
         {
             gout << color(_pline.r,_pline.g,_pline.b);
             gout << move_to(_x+i*(box_size-1),_y+j*(box_size-1)) << box(box_size,box_size);
-            if(shots[i-1][j-1]==true) gout << color(243,245,255);
+            if(shots[i-1].alive==false) gout << color(243,245,255);
             else gout << color(_back.r,_back.g,_back.b);
             gout << move_to(_x+1+i*(box_size-1),_y+1+j*(box_size-1)) << box(box_size-2,box_size-2);
 
@@ -82,7 +82,7 @@ void Map::draw() const
             }*/
 
 
-            if(shots[i-1][j-1]==true)
+            if(shots[i-1].alive==false)
             {
                 gout << color(0,0,0);
                 gout << move_to(_x+box_size/2-2+i*(box_size-1), _y+box_size/2-2+j*(box_size-1)) << box(4,4);
@@ -116,6 +116,11 @@ void Map::handle(event ev)
     }
 }
 
+void Map::newShip(Ship s)
+{
+    ships.push_back(s);
+}
+
 koord Map::getPos() const
 {
     koord a(_x,_y);
@@ -126,15 +131,35 @@ koord::koord()
 {
     _x=1;
     _y=1;
+    alive=true;
 }
 
 koord::koord(int x, int y)
 {
     _x=x;
     _y=y;
+    alive=true;
 }
 
 bool koord::operator== (koord b)
 {
     return _x==b._x && _y==b._y;
+}
+
+bool Ship::isAlive()
+{
+    int num_of_false=0;
+    for(int i=0; i<pos.size(); i++)
+    {
+        if(pos[i].alive==false) num_of_false+=1;
+    }
+    if(num_of_false==max_life) alive=false;
+    return alive;
+}
+
+Ship::Ship(vector<koord> gen_pos, int ml)
+{
+    alive = true;
+    pos=gen_pos;
+    max_life=ml;
 }

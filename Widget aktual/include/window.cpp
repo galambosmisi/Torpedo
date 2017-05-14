@@ -16,6 +16,11 @@ void Window::set_run(bool run)
     _run=run;
 }
 
+void Window::set_focus(int i)
+{
+    focus=i;
+}
+
 void Window::event_loop()
 {
     ofstream kifele("adatok.txt");

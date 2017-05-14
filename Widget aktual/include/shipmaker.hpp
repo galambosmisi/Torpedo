@@ -14,12 +14,16 @@ public: //azért public minden, mert ez csak a setUpoláshoz kell, könnyebb kinyer
     bool hor_pos;
     bool place;
     Map * _m;
+    vector<koord> _pos;
+    string _ID;
+    string comp_ID;
 
-    ShipMaker(Window * parent, Map *m, int x, int y, int bs, int db);
+    ShipMaker(Window * parent, Map *m, int x, int y, int bs, int db, string id);
     void draw() const;
     void handle(genv::event ev);
-
     void reSet();
+    void makeKoord(int i, int j);
+    void makeKoord();
 
 };
 

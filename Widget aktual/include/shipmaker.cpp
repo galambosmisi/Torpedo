@@ -4,9 +4,11 @@
 using namespace genv;
 using namespace std;
 
-ShipMaker::ShipMaker(Window * parent, Map *m, int x, int y, int bs, int db)
+ShipMaker::ShipMaker(Window * parent, Map *m, int x, int y, int bs, int db, string id)
     :Widget(parent,x,y,db*bs,bs)
 {
+    _ID=id;
+    comp_ID="cmp"+id;
     _m=m;
     hor_pos=true;
     place=false;
@@ -93,28 +95,17 @@ void ShipMaker::handle(genv::event ev)
                     _y=my+j*(box_size-1);
                     if(i>i_lim) _x=mx+=i_lim*(box_size-1);
                     if(j>j_lim) _y=my+=j_lim*(box_size-1);
-                    cout<<_x<<"   "<<_y<<endl;
-                }
-
-                if(ev.pos_x > mx && ev.pos_x-1 < mx+11*(box_size-1) && ev.pos_y > my && ev.pos_y-1 < my+11*(box_size-1) && ev.button==btn_left)
-                {
-                    koord a(i,j);
-                    for(int i=0; i<_size; i++)
+                    //cout<<i<<"   "<<j<<endl;
+                    if(ev.button==btn_left && !place)
                     {
-                        if(hor_pos) a._x+=i;
-                        else a._y+=i;
-
-                        for(int i=0; i<0; i++)
-                        {
-
-                        }
+                        //cout<<"Kapott koord: "<<i<<"   "<<j<<endl;
+                        makeKoord(i,j);
+                        _parent->action(comp_ID);
+                        if(place==true) _parent->action(_ID);
                     }
-
-                    place=true;
                 }
             }
         }
-
     }
 
 
@@ -129,4 +120,32 @@ void ShipMaker::reSet()
     _y=py;
     hor_pos=true;
     place=false;
+}
+
+void ShipMaker::makeKoord(int i, int j)
+{
+    _pos.clear();//cout<<"Meghivodott:   "<<endl;;
+    koord a(i,j);
+    _pos.push_back(a);
+    //cout<<"1"<<" elem: ";
+    //cout<<a._x<<"   "<<a._y<<endl;
+    for(int i=1; i<_size; i++)
+    {
+        //cout<<i+1<<" elem: ";
+        if(hor_pos) a._x+=1;
+        if(!hor_pos) a._y+=1;
+        _pos.push_back(a);
+        //cout<<a._x<<"   "<<a._y<<endl;
+
+    }
+    //cout<<"Vector merete:"<<_pos.size()<<endl<<endl;
+
+}
+
+void ShipMaker::makeKoord()
+{
+    for(int i=0; i<_pos.size(); i++)
+    {
+        _m->all_ship_pos.push_back(_pos[i]);
+    }
 }

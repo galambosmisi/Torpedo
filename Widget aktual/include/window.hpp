@@ -20,6 +20,7 @@ public:
     Window(int x, int y);
     virtual void event_loop();
     void push_item(Widget * w);
+    void set_focus(int i);
     void set_run(bool run);
     virtual void action(string ID);
 };
