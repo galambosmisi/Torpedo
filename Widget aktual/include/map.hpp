@@ -9,15 +9,18 @@ using namespace std;
 
 struct koord
 {
-    int _x,_y;
-    bool alive=true;
+    int _x, _y;
+    bool alive;
     koord();
-    koord(int x, int y): _x(x), _y(y) {}
+    koord(int x, int y);
+    bool operator== (koord b);
 };
 
 struct Ship
 {
     vector<koord> pos;
+    int _size;
+    koord f_pos;
     bool hor_poz = true;
 };
 
@@ -29,13 +32,12 @@ protected:
     vector<Ship> ships;
 public:
     vector<vector<bool>> shots;
-
     Map(Window * parent, int x, int y, int bs, string ID);
     Map(Window * parent, int x, int y, int bs, string ID, vector<Ship> s);
     virtual void draw() const ;
     virtual void handle(genv::event ev);
     koord getValue() const ;
-    //void setPlace(int x, int y);
+    koord getPos() const;
 };
 
 

@@ -8,6 +8,8 @@ using namespace std;
 Map::Map(Window * parent, int x, int y, int bs, string ID)
     : Widget(parent,x,y,11*bs,11*bs)
 {
+     active_x=1;
+     active_y=1;
     _ID=ID;
     shots.resize(10, vector<bool> (10, false));
     box_size=bs;
@@ -21,6 +23,8 @@ Map::Map(Window * parent, int x, int y, int bs, string ID)
 Map::Map(Window * parent, int x, int y, int bs, string ID, vector<Ship> s)
     : Widget(parent,x,y,11*bs,11*bs)
 {
+    active_x=1;
+    active_y=1;
     ships=s;
     _ID=ID;
     shots.resize(10, vector<bool> (10, false));
@@ -46,7 +50,7 @@ void Map::draw() const
     vector<string> betuk = {"A","B","C","D","E","F","G","H","I","J"};
     for(unsigned int i=1; i<11; i++)
     {
-        gout << color(_text.r,_text.g,_text.b) << move_to(_x+box_size/2+i*box_size-gout.twidth(betuk[i-1])/2, _y+box_size-gout.cdescent()-korr) << text(betuk[i-1]);
+        gout << color(_text.r,_text.g,_text.b) << move_to(_x+box_size/2+i*(box_size-1)-gout.twidth(betuk[i-1])/2, _y+box_size-gout.cdescent()-korr) << text(betuk[i-1]);
     }
 
 
@@ -55,7 +59,7 @@ void Map::draw() const
         ss.clear();
         ss.str("");
         ss<<i;
-        gout << color(_text.r,_text.g,_text.b) << move_to(_x+box_size-gout.twidth(ss.str())-korr, _y+box_size/2+5+i*box_size) << text(ss.str());
+        gout << color(_text.r,_text.g,_text.b) << move_to(_x+box_size-gout.twidth(ss.str())-korr, _y+box_size/2+5+i*(box_size-1)) << text(ss.str());
     }
 
     for(unsigned int i=1; i<11; i++)
@@ -86,11 +90,10 @@ void Map::draw() const
         }
     }
 
-    if(isActive)
-    {
+
         gout << color(_aline.r,_aline.g,_aline.b) << move_to(_x+active_x*(box_size-1), _y+active_y*(box_size-1)) << line(box_size,0) << line(0,box_size) << line(-box_size,0) << line(0, -box_size);
 
-    }
+
 }
 
 void Map::handle(event ev)
@@ -99,18 +102,39 @@ void Map::handle(event ev)
     {
         for(int j=1; j<11; j++)
         {
-            if(ev.pos_x > _x+i*box_size && ev.pos_x < _x+(i+1)*box_size && ev.pos_y > _y+j*box_size && ev.pos_y < _y+(j+1)*box_size)
+            if(ev.pos_x > _x+i*(box_size-1) && ev.pos_x-1 < _x+(i+1)*(box_size-1) && ev.pos_y > _y+j*(box_size-1) && ev.pos_y-1 < _y+(j+1)*(box_size-1))
             {
                 active_x=i;
                 active_y=j;
             }
 
-            if(ev.pos_x > _x+i*box_size && ev.pos_x < _x+(i+1)*box_size && ev.pos_y > _y+j*box_size && ev.pos_y < _y+(j+1)*box_size && ev.button==btn_left)
+            if(ev.pos_x > _x+i*(box_size-1) && ev.pos_x-1 < _x+(i+1)*(box_size-1) && ev.pos_y > _y+j*(box_size-1) && ev.pos_y-1 < _y+(j+1)*(box_size-1) && ev.button==btn_left)
             {
                  _parent->action(_ID);
-                 cout<<"johh"<<endl;
             }
         }
     }
 }
 
+koord Map::getPos() const
+{
+    koord a(_x,_y);
+    return a;
+}
+
+koord::koord()
+{
+    _x=1;
+    _y=1;
+}
+
+koord::koord(int x, int y)
+{
+    _x=x;
+    _y=y;
+}
+
+bool koord::operator== (koord b)
+{
+    return _x==b._x && _y==b._y;
+}

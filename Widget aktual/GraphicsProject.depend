@@ -330,7 +330,7 @@
 1494325368 \\mac\home\desktop\widget aktual\include\button.hpp
 	"window.hpp"
 
-1494684249 \\mac\home\desktop\widget aktual\include\window.hpp
+1494700641 \\mac\home\desktop\widget aktual\include\window.hpp
 	"widgets.hpp"
 	<iostream>
 	<vector>
@@ -395,24 +395,22 @@
 	"widgets.hpp"
 	"graphics.hpp"
 
-1494684333 source:\\mac\home\desktop\widget aktual\include\window.cpp
+1494698424 source:\\mac\home\desktop\widget aktual\include\window.cpp
 	"window.hpp"
 	"graphics.hpp"
 	<iostream>
 	<fstream>
 
-1494684557 source:\\mac\home\desktop\widget aktual\main.cpp
+1494705599 source:\\mac\home\desktop\widget aktual\main.cpp
 	"graphics.hpp"
 	"widgets.hpp"
 	"window.hpp"
 	"button.hpp"
-	"examplecheckbox.hpp"
 	"statictextbox.hpp"
 	"dynamictextbox.hpp"
-	"numericsetter.hpp"
-	"dropdownmenu.hpp"
 	"player.hpp"
 	"map.hpp"
+	"shipmaker.hpp"
 	<stdlib.h>
 	<vector>
 	<sstream>
@@ -420,12 +418,12 @@
 	<iostream>
 	<fstream>
 
-1494682137 source:\\mac\home\desktop\widget aktual\include\map.cpp
+1494704691 source:\\mac\home\desktop\widget aktual\include\map.cpp
 	"map.hpp"
 	"graphics.hpp"
 	<sstream>
 
-1494684557 \\mac\home\desktop\widget aktual\include\map.hpp
+1494704737 \\mac\home\desktop\widget aktual\include\map.hpp
 	"graphics.hpp"
 	"widgets.hpp"
 	<vector>
@@ -437,5 +435,19 @@
 
 1494681456 \\mac\home\desktop\widget aktual\include\player.hpp
 	"graphics.hpp"
+	"map.hpp"
+
+1494692883 source:\\mac\home\desktop\widget aktual\include\koord.cpp
+	"koord.hpp"
+
+1494693179 \\mac\home\desktop\widget aktual\include\koord.hpp
+
+1494705317 source:\\mac\home\desktop\widget aktual\include\shipmaker.cpp
+	"shipmaker.hpp"
+	"graphics.hpp"
+
+1494704691 \\mac\home\desktop\widget aktual\include\shipmaker.hpp
+	"graphics.hpp"
+	"widgets.hpp"
 	"map.hpp"
 

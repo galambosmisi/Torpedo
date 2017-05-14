@@ -26,7 +26,6 @@ void Window::event_loop()
     _color _back; //Háttér színe
     _back.set_color(255,255,255);
 
-    int focus = -1;
 
     //Kirajzolás
     gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
