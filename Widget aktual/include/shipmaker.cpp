@@ -11,7 +11,7 @@ ShipMaker::ShipMaker(Window * parent, Map *m, int x, int y, int bs, int db, stri
     comp_ID="cmp"+id;
     _m=m;
     hor_pos=true;
-    place=false;
+    placed=false;
     px=x;
     py=y;
     _size=db;
@@ -25,6 +25,8 @@ ShipMaker::ShipMaker(Window * parent, Map *m, int x, int y, int bs, int db, stri
 
 void ShipMaker::draw() const
 {
+
+
     for(int i=0; i<_size; i++)
     {
         if(isActive) gout << color(_aline.r,_aline.g,_aline.b);
@@ -32,13 +34,26 @@ void ShipMaker::draw() const
         if(hor_pos)
         {
             gout << move_to(_x+i*(box_size-1),_y) << box(box_size,box_size);
-            gout << move_to(_x+i*(box_size-1)+1,_y+1) << color(_back.r,_back.g,_back.b) << box(box_size-2,box_size-2);
+            if(i==0)        gout << move_to(_x+i*(box_size-1)+2,_y+2) << color(_back.r,_back.g,_back.b) << box(box_size-3,box_size-4);
+            if(i==_size-1)  gout << move_to(_x+i*(box_size-1)+1,_y+2) << color(_back.r,_back.g,_back.b) << box(box_size-3,box_size-4);
+            if(i!= 0 && i!=_size-1)  gout << move_to(_x+i*(box_size-1)+1,_y+2) << color(_back.r,_back.g,_back.b) << box(box_size-2,box_size-4);
         }
 
         else
         {
             gout << move_to(_x,_y+i*(box_size-1)) << box(box_size,box_size);
-            gout << move_to(_x+1,_y+i*(box_size-1)+1) << color(_back.r,_back.g,_back.b) << box(box_size-2,box_size-2);
+
+            if(i==0)                gout << move_to(_x+2,_y+i*(box_size-1)+2) << color(_back.r,_back.g,_back.b) << box(box_size-4,box_size-3);
+            if(i==_size-1)          gout << move_to(_x+2,_y+i*(box_size-1)+1) << color(_back.r,_back.g,_back.b) << box(box_size-4,box_size-3);
+            if(i!= 0 && i!=_size-1) gout << move_to(_x+2,_y+i*(box_size-1)+1) << color(_back.r,_back.g,_back.b) << box(box_size-4,box_size-2);
+        }
+
+        if(_size==1)
+        {
+           if(isActive) gout << color(_aline.r,_aline.g,_aline.b);
+            else  gout << color(_pline.r,_pline.g,_pline.b);
+            gout << move_to(_x,_y) << box(box_size,box_size);
+            gout << move_to(_x+2,_y+2) << color(_back.r,_back.g,_back.b) << box(box_size-4,box_size-4);
         }
 
     }
@@ -47,9 +62,9 @@ void ShipMaker::draw() const
 
 void ShipMaker::handle(genv::event ev)
 {
-    if(place) isActive=false;
+    if(placed) isActive=false;
 
-    if(!place)
+    if(!placed)
     {
         if(isActive && ev.type==ev_mouse && ev.button==btn_left)
         {
@@ -96,12 +111,12 @@ void ShipMaker::handle(genv::event ev)
                     if(i>i_lim) _x=mx+=i_lim*(box_size-1);
                     if(j>j_lim) _y=my+=j_lim*(box_size-1);
                     //cout<<i<<"   "<<j<<endl;
-                    if(ev.button==btn_left && !place)
+                    if(ev.button==btn_left && !placed)
                     {
                         //cout<<"Kapott koord: "<<i<<"   "<<j<<endl;
                         makeKoord(i,j);
                         _parent->action(comp_ID);
-                        if(place==true) _parent->action(_ID);
+                        if(placed==true) _parent->action(_ID);
                     }
                 }
             }
@@ -111,7 +126,7 @@ void ShipMaker::handle(genv::event ev)
 
     if(ev.type==ev_key && ev.keycode==key_space) hor_pos=!hor_pos;
 
-    if(!isActive && !place ) reSet();
+    if(!isActive && !placed ) reSet();
 }
 
 void ShipMaker::reSet()
@@ -119,7 +134,7 @@ void ShipMaker::reSet()
     _x=px;
     _y=py;
     hor_pos=true;
-    place=false;
+    placed=false;
 }
 
 void ShipMaker::makeKoord(int i, int j)

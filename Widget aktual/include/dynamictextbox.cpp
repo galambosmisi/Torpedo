@@ -12,7 +12,7 @@ DynamicTextBox::DynamicTextBox(Window * parent, int x, int y, int sx, int sy, st
     _text.set_color(0,0,0);            //_text.r,_text.g,_text.b
     _back.set_color(200,200,200);      //_back.r,_back.g,_back.b
     _pline.set_color(0,0,0);           //_pline.r,_pline.g,_pline.b
-    _aline.set_color(0,35,245);         //_aline.r,_aline.g,_aline.b
+    _aline.set_color(0,0,0);         //_aline.r,_aline.g,_aline.b
     _parent->push_item(this);
 }
 

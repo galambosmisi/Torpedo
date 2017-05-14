@@ -12,7 +12,7 @@ class ShipMaker : Widget
 public: //azért public minden, mert ez csak a setUpoláshoz kell, könnyebb kinyerni az adatokat
     int px, py, box_size, _size, dx, dy;
     bool hor_pos;
-    bool place;
+    bool placed;
     Map * _m;
     vector<koord> _pos;
     string _ID;
@@ -24,7 +24,6 @@ public: //azért public minden, mert ez csak a setUpoláshoz kell, könnyebb kinyer
     void reSet();
     void makeKoord(int i, int j);
     void makeKoord();
-
 };
 
 #endif // SHIPMAKER_HPP_INCLUDED

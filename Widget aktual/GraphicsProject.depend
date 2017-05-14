@@ -354,7 +354,7 @@
 	"widgets.hpp"
 	<vector>
 
-1494683322 source:\\mac\home\desktop\widget aktual\include\dynamictextbox.cpp
+1494763782 source:\\mac\home\desktop\widget aktual\include\dynamictextbox.cpp
 	"dynamictextbox.hpp"
 	"graphics.hpp"
 	<iostream>
@@ -401,7 +401,7 @@
 	<iostream>
 	<fstream>
 
-1494760178 source:\\mac\home\desktop\widget aktual\main.cpp
+1494765091 source:\\mac\home\desktop\widget aktual\main.cpp
 	"graphics.hpp"
 	"widgets.hpp"
 	"window.hpp"
@@ -423,7 +423,7 @@
 	"graphics.hpp"
 	<sstream>
 
-1494757992 \\mac\home\desktop\widget aktual\include\map.hpp
+1494764161 \\mac\home\desktop\widget aktual\include\map.hpp
 	"graphics.hpp"
 	"widgets.hpp"
 	<vector>
@@ -442,11 +442,11 @@
 
 1494693179 \\mac\home\desktop\widget aktual\include\koord.hpp
 
-1494760324 source:\\mac\home\desktop\widget aktual\include\shipmaker.cpp
+1494764653 source:\\mac\home\desktop\widget aktual\include\shipmaker.cpp
 	"shipmaker.hpp"
 	"graphics.hpp"
 
-1494758811 \\mac\home\desktop\widget aktual\include\shipmaker.hpp
+1494764653 \\mac\home\desktop\widget aktual\include\shipmaker.hpp
 	"graphics.hpp"
 	"widgets.hpp"
 	"map.hpp"

@@ -21,16 +21,13 @@ const koord w_poz(840,500);
 const koord map_poz1(10,10);
 const koord map_poz2(350,10);
 
-ostream operator<< (ostream & s, koord k)
-{
-    s<<k._x<<"  "<<k._y;
-}
 
 class setUpMenu : public Window
 {
 public:
     string player_id;
     vector<ShipMaker *> sm; //reSet() függvény egyszerűbb meghívása miatt
+    bool start=false;
 
     Map * m;
     Button * b1;
@@ -46,24 +43,28 @@ public:
     ShipMaker * sm5;
     ShipMaker * sm6;
     ShipMaker * sm7;
+    ShipMaker * sm8;
 
     setUpMenu(int x, int y, string p_id) : Window(x,y)
     {
+        player_id=p_id;
+
         m = new Map(this, 450,90,30, "setUp_map");
         b1 = new Button(this, 565,420,120,30,"Done","player_done");
         b2 = new Button(this, 95,357,120,30,"Reset","storno");
         dtx = new DynamicTextBox(this, 395,10,150,30,p_id,true);
         stx1 = new StaticTextBox(this, 290,10,30,"Player name:", false);
-        stx2 = new StaticTextBox(this, 10,120,30,"Place your ships:", false);
-        stx3 = new StaticTextBox(this, 10,140,30,"To rotate press the 'space' key", false);
+        stx2 = new StaticTextBox(this, 75,110,30,"Place all your ships:", false);
+        stx3 = new StaticTextBox(this, 35,130,30,"To rotate press the 'space' key", false);
 
         sm1  = new ShipMaker(this,m,60,180,30,4,"1");
         sm2  = new ShipMaker(this,m,60,239,30,3,"2");
-        sm3  = new ShipMaker(this,m,160,239,30,3,"3");
+        sm3  = new ShipMaker(this,m,172,239,30,3,"3");
         sm4  = new ShipMaker(this,m,60,298,30,2,"4");
         sm5  = new ShipMaker(this,m,130,298,30,2,"5");
         sm6  = new ShipMaker(this,m,200,298,30,2,"6");
         sm7  = new ShipMaker(this,m,190,180,30,1,"7");
+        sm8  = new ShipMaker(this,m,230,180,30,1,"8");
 
         sm.push_back(sm1);
         sm.push_back(sm2);
@@ -71,10 +72,21 @@ public:
         sm.push_back(sm4);
         sm.push_back(sm5);
         sm.push_back(sm6);
-        sm.push_back(sm7);
+        sm.push_back(sm8);
 
         focus=0;
     }
+
+    bool all_placed()
+    {
+        bool asd=true;
+        for(int i=0; i<sm.size(); i++)
+        {
+            if(sm[i]->placed==false) asd=false;
+        }
+        return asd;
+    }
+
 
     bool cmp (vector<koord> k)
     {
@@ -104,9 +116,21 @@ public:
     void action(string _ID)
     {
         cout<<"Beerkezett _ID: "<<_ID<<"  |"<<endl;;
-        if(_ID=="player_done") set_run(false);
+        if(_ID=="player_done")
+        {
+
+            if(all_placed()) set_run(false);
+            cout<<endl<<"Elnek-e: "<<endl;
+            for(int i=0; i<sm.size(); i++)
+            {
+                cout<<sm[i]->placed<<endl;
+            }
+            cout<<endl;
+        }
+
         if(_ID=="storno")
         {
+            m->all_ship_pos.clear();
             for(int i=0; i<sm.size(); i++)
             {
                 sm[i]->reSet();
@@ -145,17 +169,45 @@ public:
         }
         if(_ID=="7")
         {
-           Ship ms(sm7->_pos, sm7->box_size);
+            Ship ms(sm7->_pos, sm7->box_size);
             m->newShip(ms);
         }
 
-        if(_ID=="cmp1" && cmp(sm1->_pos)) {sm1->place=true; sm1->makeKoord();}
-        if(_ID=="cmp2" && cmp(sm2->_pos)) {sm2->place=true; sm2->makeKoord();}
-        if(_ID=="cmp3" && cmp(sm3->_pos)) {sm3->place=true; sm3->makeKoord();}
-        if(_ID=="cmp4" && cmp(sm4->_pos)) {sm4->place=true; sm4->makeKoord();}
-        if(_ID=="cmp5" && cmp(sm5->_pos)) {sm5->place=true; sm5->makeKoord();}
-        if(_ID=="cmp6" && cmp(sm6->_pos)) {sm6->place=true; sm6->makeKoord();}
-        if(_ID=="cmp7" && cmp(sm7->_pos)) {sm7->place=true; sm7->makeKoord();}
+        if(_ID=="cmp1" && cmp(sm1->_pos))
+        {
+            sm1->placed=true;
+            sm1->makeKoord();
+        }
+        if(_ID=="cmp2" && cmp(sm2->_pos))
+        {
+            sm2->placed=true;
+            sm2->makeKoord();
+        }
+        if(_ID=="cmp3" && cmp(sm3->_pos))
+        {
+            sm3->placed=true;
+            sm3->makeKoord();
+        }
+        if(_ID=="cmp4" && cmp(sm4->_pos))
+        {
+            sm4->placed=true;
+            sm4->makeKoord();
+        }
+        if(_ID=="cmp5" && cmp(sm5->_pos))
+        {
+            sm5->placed=true;
+            sm5->makeKoord();
+        }
+        if(_ID=="cmp6" && cmp(sm6->_pos))
+        {
+            sm6->placed=true;
+            sm6->makeKoord();
+        }
+        if(_ID=="cmp7" && cmp(sm7->_pos))
+        {
+            sm7->placed=true;
+            sm7->makeKoord();
+        }
     }
 
     void event_loop()
@@ -168,12 +220,15 @@ public:
         _back.set_color(255,255,255);
 
 
-        //Kirajzolás
+        //welcome
+        string s1, s2, s0;
+        s0="Hello!";
+        s1="You are "+player_id;
+        s2="Please press 'enter' to start building your fleet.";
         gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
-        for (size_t i=0; i<widgets.size(); i++)
-        {
-            widgets[i]->draw();
-        }
+        gout<<move_to(w_poz._x/2-gout.twidth(s0)/2, w_poz._y/2-2*((gout.cascent()+gout.cdescent())/2+10)) << color(0,0,0) << text(s0);
+        gout<<move_to(w_poz._x/2-gout.twidth(s1)/2, w_poz._y/2-((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s1);
+        gout<<move_to(w_poz._x/2-gout.twidth(s2)/2, w_poz._y/2+((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s2);
 
         gout << refresh;
 
@@ -181,6 +236,9 @@ public:
         {
             //Sztornó
             gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
+
+
+            if(ev.type==ev_key && ev.keycode==key_enter) start=true;
 
             //Kattintás, kiválasztás
             if (ev.type == ev_mouse && ev.button==btn_left)
@@ -195,17 +253,25 @@ public:
             }
 
             //Kezelés
-            if (focus!=-1)
+            if (focus!=-1 && start)
             {
                 widgets[focus]->handle(ev);
                 widgets[0]->handle(ev);
             }
 
             //Kirajzolás
-            for (size_t i=0; i<widgets.size(); i++)
+            for (size_t i=0; i<widgets.size() && start; i++)
             {
                 widgets[i]->draw();
             }
+
+            if(!start)
+            {
+                gout<<move_to(w_poz._x/2-gout.twidth(s0)/2, w_poz._y/2-2*((gout.cascent()+gout.cdescent())/2+10)) << color(0,0,0) << text(s0);
+                gout<<move_to(w_poz._x/2-gout.twidth(s1)/2, w_poz._y/2-((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s1);
+                gout<<move_to(w_poz._x/2-gout.twidth(s2)/2, w_poz._y/2+((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s2);
+            }
+
 
             gout << refresh;
         }
@@ -215,6 +281,8 @@ public:
 class Torpedo : public Window
 {
 protected:
+
+    bool player_changed=false;
     Player * p1;
     Player * p2;
     Button * b;
@@ -231,6 +299,11 @@ public:
         p2 = new Player(this, s2, player_id2, "click_2");
 
 
+    }
+
+    void change_player()
+    {
+        player_changed=!player_changed;
     }
 
     void action(string _ID)
@@ -295,10 +368,6 @@ public:
     }
 };
 
-void change_player()
-{
-
-}
 
 int main()
 {
