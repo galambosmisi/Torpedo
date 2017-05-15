@@ -18,14 +18,15 @@ using namespace genv;
 using namespace std;
 
 const koord w_poz(840,500);
-const koord map_poz1(10,10);
-const koord map_poz2(350,10);
+const koord map_poz1(60,90);
+const koord map_poz2(450,90);
 
 
 class setUpMenu : public Window
 {
 public:
     string player_id;
+    string player_name;
     vector<ShipMaker *> sm; //reSet() függvény egyszerűbb meghívása miatt
     bool start=false;
 
@@ -72,6 +73,7 @@ public:
         sm.push_back(sm4);
         sm.push_back(sm5);
         sm.push_back(sm6);
+        sm.push_back(sm7);
         sm.push_back(sm8);
 
         focus=0;
@@ -91,36 +93,29 @@ public:
     bool cmp (vector<koord> k)
     {
         bool asd=true;
-        cout<<endl<<"Osszehasonlitas: "<<endl;
         for(int i=0; i<m->all_ship_pos.size(); i++)
         {
-            cout<<endl<<i<< ". alap elem:";
             for(int j=0; j<k.size(); j++)
             {
-                cout<<endl<<"Eddigi: "<<m->all_ship_pos[i]._x<<"   "<<m->all_ship_pos[i]._y;
-                cout<<endl<<"  Most: "<<k[j]._x<<"   "<<k[j]._y;
                 if(m->all_ship_pos[i]==k[j]) asd=false;
-                cout<<endl<<" Ertek: "<<asd;
                 if(asd==false) break;
 
 
             }
-            cout<<endl;
             if(asd==false) break;
         }
-
-        cout<<endl<<"Eredmeny: "<<asd<<endl<<endl;
         return asd;
     }
 
     void action(string _ID)
     {
-        cout<<"Beerkezett _ID: "<<_ID<<"  |"<<endl;;
+        cout<<"Beerkezett _ID: "<<_ID<<"  |"<<endl;
         if(_ID=="player_done")
         {
 
             if(all_placed()) set_run(false);
-            cout<<endl<<"Elnek-e: "<<endl;
+            player_name=dtx->getValue();
+            cout<<endl<<"Placed: "<<endl;
             for(int i=0; i<sm.size(); i++)
             {
                 cout<<sm[i]->placed<<endl;
@@ -130,46 +125,53 @@ public:
 
         if(_ID=="storno")
         {
-            m->all_ship_pos.clear();
             for(int i=0; i<sm.size(); i++)
             {
                 sm[i]->reSet();
             }
+            m->all_ship_pos.clear();
+            m->ships.clear();
+
         }
 
         if(_ID=="1")
         {
-            Ship ms(sm1->_pos, sm1->box_size);
+            Ship ms(sm1->_pos, sm1->_size);
             m->newShip(ms);
         }
         if(_ID=="2")
         {
-            Ship ms(sm2->_pos, sm2->box_size);
+            Ship ms(sm2->_pos, sm2->_size);
             m->newShip(ms);
         }
         if(_ID=="3")
         {
-            Ship ms(sm3->_pos, sm3->box_size);
+            Ship ms(sm3->_pos, sm3->_size);
             m->newShip(ms);
         }
         if(_ID=="4")
         {
-            Ship ms(sm4->_pos, sm4->box_size);
+            Ship ms(sm4->_pos, sm4->_size);
             m->newShip(ms);
         }
         if(_ID=="5")
         {
-            Ship ms(sm5->_pos, sm5->box_size);
+            Ship ms(sm5->_pos, sm5->_size);
             m->newShip(ms);
         }
         if(_ID=="6")
         {
-            Ship ms(sm6->_pos, sm6->box_size);
+            Ship ms(sm6->_pos, sm6->_size);
             m->newShip(ms);
         }
         if(_ID=="7")
         {
-            Ship ms(sm7->_pos, sm7->box_size);
+            Ship ms(sm7->_pos, sm7->_size);
+            m->newShip(ms);
+        }
+        if(_ID=="8")
+        {
+            Ship ms(sm8->_pos, sm8->_size);
             m->newShip(ms);
         }
 
@@ -208,6 +210,12 @@ public:
             sm7->placed=true;
             sm7->makeKoord();
         }
+        if(_ID=="cmp8" && cmp(sm8->_pos))
+        {
+            sm8->placed=true;
+            sm8->makeKoord();
+        }
+        cout<<"-----------------------------------------"<<endl<<endl;
     }
 
     void event_loop()
@@ -231,9 +239,10 @@ public:
         gout<<move_to(w_poz._x/2-gout.twidth(s2)/2, w_poz._y/2+((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s2);
 
         gout << refresh;
-
+        gin.timer(10);
         while(gin >> ev && _run)
         {
+            if(ev.keycode==key_escape) exit(0);
             //Sztornó
             gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
 
@@ -278,44 +287,104 @@ public:
     }
 };
 
-class Torpedo : public Window
+class Torpedo : Window
 {
 protected:
+    string winner;
 
-    bool player_changed=false;
     Player * p1;
+    string player_1_ID;
+    Map * p1_map;
     Player * p2;
-    Button * b;
-    string active_player="p1";
-    bool shot=false;
+    string player_2_ID;
+    Map * p2_map;
 
+    Player * active;
+    Button * b;
+    bool shot=false;
+    bool game_on=false;
+    bool setUp_on=true;
+    bool player_changed=true;
+    bool game_end=false;
 
 public:
 
-    Torpedo(int x, int y, vector<Ship> s1, vector<Ship> s2, string player_id1, string player_id2) : Window(x, y)
+
+    Torpedo(int x, int y) : Window(x,y) {}
+
+    void change_player(string p)
     {
-        b = new Button(this, 175,420,120,30,"Kész","turn_player");
-        p1 = new Player(this, s1, player_id1, "click_1");
-        p2 = new Player(this, s2, player_id2, "click_2");
+        if(p=="p1")
+        {
+            p1->action("nemkattinthato");
+            p1_map->draw_ship=true;
+            p1_map->shot=false;
+            p1_map->setPos(map_poz1._x,map_poz1._y);
+            p1_map->life=p1->get_life();
+            p2_map->draw_ship=false;
+            p2_map->shot=true;
+            p2_map->handleable=true;
+            p2_map->setPos(map_poz2._x,map_poz2._y);
+            active=p1;
+        }
 
-
-    }
-
-    void change_player()
-    {
-        player_changed=!player_changed;
+        if(p=="p2")
+        {
+            p2->action("nemkattinthato");
+            p2_map->draw_ship=true;
+            p2_map->shot=false;
+            p2_map->setPos(map_poz1._x,map_poz1._y);
+            p2_map->life=p2->get_life();
+            p1_map->draw_ship=false;
+            p1_map->shot=true;
+            p1_map->handleable=true;
+            p1_map->setPos(map_poz2._x,map_poz2._y);
+            active=p2;
+        }
+        cout<<"Changed: "<<active->get_name()<<endl;
+        player_changed=false;
     }
 
     void action(string _ID)
     {
-        cout<<_ID<<endl;
-        if(_ID=="click_1")
+        cout<<"-----------------------------------------"<<endl<<endl;
+        cout<<"Beerkezett _ID: "<<_ID<<"  |"<<endl;
+        if(_ID=="csere" && player_changed)
         {
-            cout<<"nyehh";
+            if(active==p1 && player_changed) change_player("p2");
+            if(active==p2 && player_changed) change_player("p1");
         }
+        if(_ID=="noHand")
+        {
+            if(active==p1) p2_map->handleable=false;
+            if(active==p2) p1_map->handleable=false;
+        }
+        if(_ID=="getLife")
+        {
+            if(active==p1) p2_map->life=p2->get_life();
+            if(p2->get_life()==0)
+            {
+                game_on=false;
+                game_end=true;
+                winner=p1->get_name();
+                p1->set_run(false);
+                p2->set_run(false);
+            }
+            if(active==p2) p1_map->life=p1->get_life();
+            if(p1->get_life()==0)
+            {
+                game_on=false;
+                game_end=true;
+                winner=p2->get_name();
+                p1->set_run(false);
+                p2->set_run(false);
+            }
+        }
+        cout<<"-----------------------------------------"<<endl<<endl;
     }
 
-    void event_loop()
+
+    void game()
     {
         event ev;
 
@@ -324,69 +393,93 @@ public:
         _color _back; //Háttér színe
         _back.set_color(255,255,255);
 
+        gin.timer(20);
 
-        //Kirajzolás
-        gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
-        for (size_t i=0; i<widgets.size(); i++)
+        while(gin >> ev && _run && ev.keycode!=key_escape )
         {
-            widgets[i]->draw();
-        }
 
-        gout << refresh;
 
-        while(gin >> ev && _run)
-        {
-            //Sztornó
-            gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
-
-            //Kattintás, kiválasztás
-            if (ev.type == ev_mouse && ev.button==btn_left)
+            if(setUp_on)
             {
-                for (size_t i=0; i<widgets.size(); i++)
+                setUpMenu sm_p1(w_poz._x,w_poz._y, "Player_1");
+                sm_p1.event_loop();
+
+                setUpMenu sm_p2(w_poz._x,w_poz._y, "Player_2");
+                sm_p2.event_loop();
+
+                p1 = new Player(this, sm_p1.player_id, sm_p1.player_name,w_poz._x,w_poz._y);
+                p2 = new Player(this, sm_p2.player_id, sm_p2.player_name,w_poz._x,w_poz._y);
+
+                p1_map = new Map(p1,p2, 60,90,30, "map_1", sm_p1.m->ships);
+                p2_map = new Map(p2,p1, 60,90,30, "map_2", sm_p2.m->ships);
+
+                change_player("p1");
+                setUp_on=false;
+            }
+
+
+
+
+            if(!game_on && !game_end)
+            {
+                string s1, s2;
+                s1=p1->get_name()+" start the game ";
+                s2="Please press 'enter' to begin the war.";
+                gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
+                gout<<move_to(w_poz._x/2-gout.twidth(s1)/2, w_poz._y/2-((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s1);
+                gout<<move_to(w_poz._x/2-gout.twidth(s2)/2, w_poz._y/2+((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s2);
+                if(ev.type==ev_key && ev.keycode==key_enter)
                 {
-                    if (widgets[i]->is_selected(ev.pos_x, ev.pos_y))
-                    {
-                        focus = i;
-                    }
+                    player_changed=true;
+                    game_on=true;
                 }
             }
 
-            //Kezelés
-            if (focus!=-1)
+
+            if(!game_on && game_end)
             {
-                widgets[focus]->handle(ev);
+                string s1, s2;
+                s1="The winner is: "+winner;
+                s2="Please press 'esc' to end the war.";
+                gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
+                gout<<move_to(w_poz._x/2-gout.twidth(s1)/2, w_poz._y/2-((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s1);
+                gout<<move_to(w_poz._x/2-gout.twidth(s2)/2, w_poz._y/2+((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s2);
+                if(ev.type==ev_key && ev.keycode==key_escape)
+                {
+                    _run=false;
+                }
             }
 
-            //Kirajzolás
-            for (size_t i=0; i<widgets.size(); i++)
+
+            if(!player_changed )
             {
-                widgets[i]->draw();
+                string s1, s2;
+                s1="Now time to change";
+                s2="Please press 'enter' to continue if you name: "+active->get_name();
+                gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
+                gout<<move_to(w_poz._x/2-gout.twidth(s1)/2, w_poz._y/2-((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s1);
+                gout<<move_to(w_poz._x/2-gout.twidth(s2)/2, w_poz._y/2+((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s2);
+                if(ev.type==ev_key && ev.keycode==key_enter) player_changed=true;
             }
 
+            if(game_on && player_changed)
+            {
+                cout<<"Active: "<<active->get_name()<<endl;
+                active->set_run(true);
+                active->event_loop();
+
+            }
             gout << refresh;
+            gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
         }
+
     }
 };
 
 
 int main()
 {
-    vector<Ship> s1;
-    vector<Ship> s2;
-    string p_id1;
-    string p_id2;
-
-    setUpMenu p1(w_poz._x,w_poz._y, "Player_1");
-    p1.event_loop();
-    s1=p1.m->ships;
-    p_id1=p1.player_id;
-
-    setUpMenu p2(w_poz._x,w_poz._y, "Player_2");
-    p2.event_loop();
-    s2=p2.m->ships;
-    p_id2=p2.player_id;
-
-    Torpedo ablak(w_poz._x,w_poz._y, s1, s2, p_id1, p_id2);
-    ablak.event_loop();
+    Torpedo torpedo(w_poz._x,w_poz._y);
+    torpedo.game();
     return 0;
 }

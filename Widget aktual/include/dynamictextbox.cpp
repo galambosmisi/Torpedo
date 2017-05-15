@@ -50,6 +50,8 @@ void DynamicTextBox::handle(event ev)
         _s+=ev.keycode;
 
     }
+
+    if(ev.type == ev_key && ev.keycode==key_enter && _s != "") _parent->action("player_done");
 }
 
 void DynamicTextBox::set_text(string s)

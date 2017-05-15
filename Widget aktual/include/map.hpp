@@ -3,6 +3,7 @@
 
 #include "graphics.hpp"
 #include "widgets.hpp"
+#include "player.hpp"
 #include <vector>
 
 using namespace std;
@@ -15,34 +16,46 @@ struct koord
     koord(int x, int y);
     bool operator== (koord b);
 
-    ostream operator<< (ostream& s);
 };
 
 struct Ship
 {
     vector<koord> pos;
     int max_life;
-    bool alive;
+    bool s_alive;
+
     Ship(vector<koord> gen_pos, int ml);
     bool isAlive();
+    void draw() const;
+    bool hor_pos;
+
 };
 
 class Map : public Widget
 {
 protected:
     string _ID;
-    int box_size, active_x, active_y;
+    int box_size;
+    Window * _enemy;
 public:
+    int active_x, active_y, life;
+    bool draw_ship;
+    bool shot;
+    bool handleable;
     vector<Ship> ships;
     vector<koord> all_ship_pos;
-    vector<koord> shots;
-    Map(Window * parent, int x, int y, int bs, string ID);
-    Map(Window * parent, int x, int y, int bs, string ID, vector<Ship> s);
+    vector<vector<bool>> shots;
+
+    Map(Window * parent,  int x, int y, int bs, string ID);
+    Map(Window * parent, Window * en, int x, int y, int bs, string ID, vector<Ship> s);
     virtual void draw() const ;
     virtual void handle(genv::event ev);
     koord getValue() const ;
     koord getPos() const;
     void newShip(Ship s);
+    void setPos(int x, int y);
+    bool isShip(int x, int y);
+    bool isShip_d(int x, int y) const;
 };
 
 

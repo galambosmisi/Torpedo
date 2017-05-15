@@ -40,8 +40,6 @@
 			<Add library="lib/libSDLmain.a" />
 			<Add directory="lib" />
 		</Linker>
-		<Unit filename="\\Mac\Home\Desktop\Widget aktual\include\player.cpp" />
-		<Unit filename="\\Mac\Home\Desktop\Widget aktual\include\player.hpp" />
 		<Unit filename="include/button.cpp" />
 		<Unit filename="include/button.hpp" />
 		<Unit filename="include/dropdownmenu.cpp" />
@@ -55,6 +53,10 @@
 		<Unit filename="include/map.hpp" />
 		<Unit filename="include/numericsetter.cpp" />
 		<Unit filename="include/numericsetter.hpp" />
+		<Unit filename="include/player.cpp" />
+		<Unit filename="include/player.hpp" />
+		<Unit filename="include/shipmaker.cpp" />
+		<Unit filename="include/shipmaker.hpp" />
 		<Unit filename="include/staticetextbox.cpp" />
 		<Unit filename="include/statictextbox.hpp" />
 		<Unit filename="include/widgets.cpp" />

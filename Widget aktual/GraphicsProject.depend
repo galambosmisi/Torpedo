@@ -324,10 +324,10 @@
 1493655075 c:\users\galambos mihály\desktop\widget készlet\include\button.hpp
 	"window.hpp"
 
-1494328186 source:\\mac\home\desktop\widget aktual\include\button.cpp
+1494818190 source:\\mac\home\desktop\widget aktual\include\button.cpp
 	"button.hpp"
 
-1494325368 \\mac\home\desktop\widget aktual\include\button.hpp
+1494809303 \\mac\home\desktop\widget aktual\include\button.hpp
 	"window.hpp"
 
 1494751581 \\mac\home\desktop\widget aktual\include\window.hpp
@@ -354,7 +354,7 @@
 	"widgets.hpp"
 	<vector>
 
-1494763782 source:\\mac\home\desktop\widget aktual\include\dynamictextbox.cpp
+1494810675 source:\\mac\home\desktop\widget aktual\include\dynamictextbox.cpp
 	"dynamictextbox.hpp"
 	"graphics.hpp"
 	<iostream>
@@ -401,7 +401,7 @@
 	<iostream>
 	<fstream>
 
-1494765091 source:\\mac\home\desktop\widget aktual\main.cpp
+1494823065 source:\\mac\home\desktop\widget aktual\main.cpp
 	"graphics.hpp"
 	"widgets.hpp"
 	"window.hpp"
@@ -418,23 +418,28 @@
 	<iostream>
 	<fstream>
 
-1494758450 source:\\mac\home\desktop\widget aktual\include\map.cpp
+1494831947 source:\\mac\home\desktop\widget aktual\include\map.cpp
 	"map.hpp"
 	"graphics.hpp"
 	<sstream>
 
-1494764161 \\mac\home\desktop\widget aktual\include\map.hpp
+1494823192 \\mac\home\desktop\widget aktual\include\map.hpp
 	"graphics.hpp"
 	"widgets.hpp"
+	"player.hpp"
 	<vector>
 
-1494681443 source:\\mac\home\desktop\widget aktual\include\player.cpp
+1494818976 source:\\mac\home\desktop\widget aktual\include\player.cpp
 	"player.hpp"
 	"graphics.hpp"
+	"window.hpp"
 	<sstream>
+	<stdlib.h>
 
-1494681456 \\mac\home\desktop\widget aktual\include\player.hpp
+1494832157 \\mac\home\desktop\widget aktual\include\player.hpp
 	"graphics.hpp"
+	"statictextbox.hpp"
+	"button.hpp"
 	"map.hpp"
 
 1494692883 source:\\mac\home\desktop\widget aktual\include\koord.cpp
@@ -442,7 +447,7 @@
 
 1494693179 \\mac\home\desktop\widget aktual\include\koord.hpp
 
-1494764653 source:\\mac\home\desktop\widget aktual\include\shipmaker.cpp
+1494820658 source:\\mac\home\desktop\widget aktual\include\shipmaker.cpp
 	"shipmaker.hpp"
 	"graphics.hpp"
 

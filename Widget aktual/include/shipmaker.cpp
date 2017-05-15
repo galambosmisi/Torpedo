@@ -42,7 +42,6 @@ void ShipMaker::draw() const
         else
         {
             gout << move_to(_x,_y+i*(box_size-1)) << box(box_size,box_size);
-
             if(i==0)                gout << move_to(_x+2,_y+i*(box_size-1)+2) << color(_back.r,_back.g,_back.b) << box(box_size-4,box_size-3);
             if(i==_size-1)          gout << move_to(_x+2,_y+i*(box_size-1)+1) << color(_back.r,_back.g,_back.b) << box(box_size-4,box_size-3);
             if(i!= 0 && i!=_size-1) gout << move_to(_x+2,_y+i*(box_size-1)+1) << color(_back.r,_back.g,_back.b) << box(box_size-4,box_size-2);
@@ -110,10 +109,10 @@ void ShipMaker::handle(genv::event ev)
                     _y=my+j*(box_size-1);
                     if(i>i_lim) _x=mx+=i_lim*(box_size-1);
                     if(j>j_lim) _y=my+=j_lim*(box_size-1);
-                    //cout<<i<<"   "<<j<<endl;
                     if(ev.button==btn_left && !placed)
                     {
-                        //cout<<"Kapott koord: "<<i<<"   "<<j<<endl;
+                        if(hor_pos && i>11-_size) i=11-_size;
+                        if(!hor_pos && j>11-_size) j=11-_size;
                         makeKoord(i,j);
                         _parent->action(comp_ID);
                         if(placed==true) _parent->action(_ID);
@@ -124,7 +123,7 @@ void ShipMaker::handle(genv::event ev)
     }
 
 
-    if(ev.type==ev_key && ev.keycode==key_space) hor_pos=!hor_pos;
+    if(ev.type==ev_key && ev.keycode==key_space && !placed) hor_pos=!hor_pos;
 
     if(!isActive && !placed ) reSet();
 }
@@ -139,22 +138,15 @@ void ShipMaker::reSet()
 
 void ShipMaker::makeKoord(int i, int j)
 {
-    _pos.clear();//cout<<"Meghivodott:   "<<endl;;
+    _pos.clear();
     koord a(i,j);
     _pos.push_back(a);
-    //cout<<"1"<<" elem: ";
-    //cout<<a._x<<"   "<<a._y<<endl;
     for(int i=1; i<_size; i++)
     {
-        //cout<<i+1<<" elem: ";
         if(hor_pos) a._x+=1;
         if(!hor_pos) a._y+=1;
         _pos.push_back(a);
-        //cout<<a._x<<"   "<<a._y<<endl;
-
     }
-    //cout<<"Vector merete:"<<_pos.size()<<endl<<endl;
-
 }
 
 void ShipMaker::makeKoord()
@@ -162,5 +154,8 @@ void ShipMaker::makeKoord()
     for(int i=0; i<_pos.size(); i++)
     {
         _m->all_ship_pos.push_back(_pos[i]);
+        cout<<_pos[i]._x<<"  "<<_pos[i]._y<<endl;
+
     }
+    cout<<"Lerakva: "<<placed<<endl<<endl;
 }

@@ -6,6 +6,8 @@ using namespace genv;
 Button::Button(Window * parent, int x, int y, int sx, int sy, string s, string az)
     : Widget(parent, x,y,sx,sy)
 {
+    _clickable=true;
+    isExtended=false;
     _title=s;
     _ID=az;
     _text.set_color(0,0,0);        //_text.r,_text.g,_text.b
@@ -15,6 +17,24 @@ Button::Button(Window * parent, int x, int y, int sx, int sy, string s, string a
     _parent->push_item(this);
 }
 
+void Button::set_clickable(bool mire)
+{
+
+    if(mire==false)
+    {
+        cout<<"I'm not clickable!"<<_parent<<endl;
+        _back.set_color(224,224,224);
+        _pline.set_color(184,184,184);
+        _clickable=false;
+    }
+    if(mire==true)
+    {
+       cout<<"I'm clickable!"<<_parent<<endl;
+       _back.set_color(255,255,255);
+        _pline.set_color(0,0,0);
+        _clickable=true;
+    }
+}
 
 
 void Button::draw() const
@@ -37,9 +57,12 @@ void Button::draw() const
 
 void Button::handle(genv::event ev)
 {
-    if(ev.button < 0 && ev.pos_x > _x && ev.pos_x < _x+_size_x && ev.pos_y > _y && ev.pos_y < _y + _size_y) isExtended=false;
-    if(ev.button > 0 && ev.pos_x > _x && ev.pos_x < _x+_size_x && ev.pos_y > _y && ev.pos_y < _y + _size_y) isExtended=true;
-    if(ev.type==ev_mouse && ev.button==btn_left && ev.pos_x > _x && ev.pos_x < _x+_size_x && ev.pos_y > _y && ev.pos_y < _y + _size_y) action();
+    if(_clickable)
+    {
+        if(ev.button < 0 && ev.pos_x > _x && ev.pos_x < _x+_size_x && ev.pos_y > _y && ev.pos_y < _y + _size_y) isExtended=false;
+        if(ev.button > 0 && ev.pos_x > _x && ev.pos_x < _x+_size_x && ev.pos_y > _y && ev.pos_y < _y + _size_y) isExtended=true;
+        if(ev.type==ev_mouse && ev.button==btn_left && ev.pos_x > _x && ev.pos_x < _x+_size_x && ev.pos_y > _y && ev.pos_y < _y + _size_y) action();
+    }
 }
 
 void Button::action() const
