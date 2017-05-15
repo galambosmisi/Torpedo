@@ -22,14 +22,12 @@ void Button::set_clickable(bool mire)
 
     if(mire==false)
     {
-        cout<<"I'm not clickable!"<<_parent<<endl;
         _back.set_color(224,224,224);
         _pline.set_color(184,184,184);
         _clickable=false;
     }
     if(mire==true)
     {
-       cout<<"I'm clickable!"<<_parent<<endl;
        _back.set_color(255,255,255);
         _pline.set_color(0,0,0);
         _clickable=true;

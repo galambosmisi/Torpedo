@@ -16,6 +16,7 @@ class Player : public Window
     StaticTextBox * stx2;
     StaticTextBox * stx3;
     StaticTextBox * stx4;
+    StaticTextBox * stx5;
     Button * b;
 public:
 

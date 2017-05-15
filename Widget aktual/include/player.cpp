@@ -19,10 +19,10 @@ Player::Player(Window * parent, string p_id, string p_name, int x, int y) : Wind
     player_id=p_id;
     player_name=p_name;
     stx1= new StaticTextBox(this, 515,420,30,"To shoot click on the map", false);
-    stx2= new StaticTextBox(this, 105,60,30,"Your fleet", true);
-    stx3= new StaticTextBox(this, 497,60,30,"The enemy's fleet", true);
-    stx4= new StaticTextBox(this, 356,10,30,player_name, false);
-    cout<<gout.twidth(player_name);
+    stx2= new StaticTextBox(this, 235-(gout.twidth("Your fleet")/2),60,30,"Your fleet", false);
+    stx3= new StaticTextBox(this, 547,60,30,"The enemy's fleet", false);
+    stx4= new StaticTextBox(this, 420-(gout.twidth(player_name)/2),10,30,player_name, true);
+    stx5= new StaticTextBox(this, 235-(gout.twidth("If you missed, press done")/2),450,30,"If you missed, press done", false);
     b = new Button(this, 175,420,120,30,"DONE", "nemtalalt");
 }
 

@@ -324,7 +324,7 @@
 1493655075 c:\users\galambos mihály\desktop\widget készlet\include\button.hpp
 	"window.hpp"
 
-1494818190 source:\\mac\home\desktop\widget aktual\include\button.cpp
+1494837461 source:\\mac\home\desktop\widget aktual\include\button.cpp
 	"button.hpp"
 
 1494809303 \\mac\home\desktop\widget aktual\include\button.hpp
@@ -401,7 +401,7 @@
 	<iostream>
 	<fstream>
 
-1494823065 source:\\mac\home\desktop\widget aktual\main.cpp
+1494837905 source:\\mac\home\desktop\widget aktual\main.cpp
 	"graphics.hpp"
 	"widgets.hpp"
 	"window.hpp"
@@ -418,7 +418,7 @@
 	<iostream>
 	<fstream>
 
-1494831947 source:\\mac\home\desktop\widget aktual\include\map.cpp
+1494837905 source:\\mac\home\desktop\widget aktual\include\map.cpp
 	"map.hpp"
 	"graphics.hpp"
 	<sstream>
@@ -429,14 +429,14 @@
 	"player.hpp"
 	<vector>
 
-1494818976 source:\\mac\home\desktop\widget aktual\include\player.cpp
+1494837576 source:\\mac\home\desktop\widget aktual\include\player.cpp
 	"player.hpp"
 	"graphics.hpp"
 	"window.hpp"
 	<sstream>
 	<stdlib.h>
 
-1494832157 \\mac\home\desktop\widget aktual\include\player.hpp
+1494836468 \\mac\home\desktop\widget aktual\include\player.hpp
 	"graphics.hpp"
 	"statictextbox.hpp"
 	"button.hpp"
@@ -447,7 +447,7 @@
 
 1494693179 \\mac\home\desktop\widget aktual\include\koord.hpp
 
-1494820658 source:\\mac\home\desktop\widget aktual\include\shipmaker.cpp
+1494837003 source:\\mac\home\desktop\widget aktual\include\shipmaker.cpp
 	"shipmaker.hpp"
 	"graphics.hpp"
 

@@ -109,18 +109,11 @@ public:
 
     void action(string _ID)
     {
-        cout<<"Beerkezett _ID: "<<_ID<<"  |"<<endl;
         if(_ID=="player_done")
         {
 
             if(all_placed()) set_run(false);
             player_name=dtx->getValue();
-            cout<<endl<<"Placed: "<<endl;
-            for(int i=0; i<sm.size(); i++)
-            {
-                cout<<sm[i]->placed<<endl;
-            }
-            cout<<endl;
         }
 
         if(_ID=="storno")
@@ -215,13 +208,14 @@ public:
             sm8->placed=true;
             sm8->makeKoord();
         }
-        cout<<"-----------------------------------------"<<endl<<endl;
     }
 
     void event_loop()
     {
         event ev;
-
+        cout<<"To shoot click on the map:  "<<gout.twidth("To shoot click on the map")<<endl;
+        cout<<"Your fleet:  "<<gout.twidth("Your fleet")<<endl;
+        cout<<"The enemy's fleet:  "<<gout.twidth("The enemy's fleet")<<endl;
         gout.open(XX,YY);
 
         _color _back; //Háttér színe
@@ -341,14 +335,11 @@ public:
             p1_map->setPos(map_poz2._x,map_poz2._y);
             active=p2;
         }
-        cout<<"Changed: "<<active->get_name()<<endl;
         player_changed=false;
     }
 
     void action(string _ID)
     {
-        cout<<"-----------------------------------------"<<endl<<endl;
-        cout<<"Beerkezett _ID: "<<_ID<<"  |"<<endl;
         if(_ID=="csere" && player_changed)
         {
             if(active==p1 && player_changed) change_player("p2");
@@ -380,7 +371,6 @@ public:
                 p2->set_run(false);
             }
         }
-        cout<<"-----------------------------------------"<<endl<<endl;
     }
 
 
@@ -420,7 +410,7 @@ public:
 
 
 
-            if(!game_on && !game_end)
+            if(!game_on && !game_end )
             {
                 string s1, s2;
                 s1=p1->get_name()+" start the game ";
@@ -455,7 +445,7 @@ public:
             {
                 string s1, s2;
                 s1="Now time to change";
-                s2="Please press 'enter' to continue if you name: "+active->get_name();
+                s2="Please press 'enter' to continue if your name: "+active->get_name();
                 gout << move_to(0,0) << color(_back.r,_back.g,_back.b) << box(XX,YY);
                 gout<<move_to(w_poz._x/2-gout.twidth(s1)/2, w_poz._y/2-((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s1);
                 gout<<move_to(w_poz._x/2-gout.twidth(s2)/2, w_poz._y/2+((gout.cascent()+gout.cdescent())/2+5)) << color(0,0,0) << text(s2);
@@ -464,7 +454,6 @@ public:
 
             if(game_on && player_changed)
             {
-                cout<<"Active: "<<active->get_name()<<endl;
                 active->set_run(true);
                 active->event_loop();
 
@@ -479,6 +468,7 @@ public:
 
 int main()
 {
+
     Torpedo torpedo(w_poz._x,w_poz._y);
     torpedo.game();
     return 0;

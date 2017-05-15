@@ -63,7 +63,6 @@ bool Map::isShip (int x, int y)
                     if(ships[i].pos[j]._x==x &&ships[i].pos[j]._y==y)
                     {
                         asd=true;
-                        cout<<"Kilove: "<<i<<"  "<<j<<endl;
                         ships[i].pos[j].alive=false;
                     }
                 }
@@ -140,7 +139,7 @@ void Map::draw() const
 
     if(shot)
     {
-        gout << move_to(_x+11*(box_size-1)+1,_y+box_size-1) << color(0,0,0) << box(7,10*(box_size-1));
+        gout << move_to(_x+11*(box_size-1)+1,_y+box_size-1) << color(0,0,0) << box(7,10*(box_size-1)+1);
         gout << move_to(_x+11*(box_size-1)+2,_y+box_size-1+1+(18-life)*(10*(box_size-1)-2)/18) << color(0,255,128) << box(5,life*(10*(box_size-1)-1)/18);
     }
 
@@ -214,11 +213,9 @@ void Map::handle(event ev)
 
             if(ev.pos_x > _x+i*(box_size-1) && ev.pos_x-1 < _x+(i+1)*(box_size-1) && ev.pos_y > _y+j*(box_size-1) && ev.pos_y-1 < _y+(j+1)*(box_size-1) && ev.button==btn_left && shot && handleable)
             {
-                cout<<"Loves: "<<i<<"  "<<j<<endl;
                 shots[i-1][j-1]=true;
                 if(isShip(i,j))
                 {
-                    cout<<"Talalt"<<endl;
                     _parent->action("talalt");
                     _parent->action("getLife");
                     for(int k=0;k<ships.size();k++)
@@ -229,7 +226,6 @@ void Map::handle(event ev)
 
                 if(!isShip(i,j))
                 {
-                    cout<<"Nem talalt"<<endl;
                     _enemy->action("kattinthato");
                 }
             }

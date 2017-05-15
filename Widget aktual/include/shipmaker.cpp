@@ -154,8 +154,6 @@ void ShipMaker::makeKoord()
     for(int i=0; i<_pos.size(); i++)
     {
         _m->all_ship_pos.push_back(_pos[i]);
-        cout<<_pos[i]._x<<"  "<<_pos[i]._y<<endl;
 
-    }
-    cout<<"Lerakva: "<<placed<<endl<<endl;
+    };
 }
